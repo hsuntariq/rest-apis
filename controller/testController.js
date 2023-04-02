@@ -1,18 +1,24 @@
+const AsyncHandler = require("express-async-handler");
+const Goals = require("../models/goalModel");
 const getData = (req, res) => {
-  if (!req.body.name) {
-    res.status(400);
-    throw new Error("Please enter all the fields");
-  }
   res.status(200).json({
-    message: req.body.name,
+    message: "this is a get request",
   });
 };
 
-const postData = (req, res) => {
-  res.status(200).json({
-    message: "this is a post request",
+const postData = AsyncHandler(async (req, res) => {
+  if (!req.body.name) {
+    res.status(400);
+    throw new Error("please fill out all the fields");
+  }
+  const data = await Goals.create({
+    goal: req.body.name,
   });
-};
+
+  res.status(200).json({
+    data,
+  });
+});
 
 const updateData = (req, res) => {
   res.status(200).json({

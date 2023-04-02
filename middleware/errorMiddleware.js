@@ -4,7 +4,7 @@ const errorHandling = (req, res, err, next) => {
   res.status(statusCode);
   // send back error
   res.json({
-    error: err,
+    error: err.message,
   });
 };
 
