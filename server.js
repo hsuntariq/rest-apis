@@ -14,7 +14,8 @@ connectDB();
 app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use("/api/rest", require("./routes/testRoutes"));
-
+// user requests
+app.use("/api/users", require("./routes/userRoutes"));
 // build a server
 app.listen(process.env.PORT, () =>
   console.log(`Server started on port:${process.env.PORT.cyan}`)
